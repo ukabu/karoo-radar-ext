@@ -50,4 +50,4 @@
 ## 7. Deployment
 
 - [x] 7.1 Create `deploy.sh` script: build debug APK + `adb install -r` + echo next steps
-- [ ] 7.2 Test deployment to Karoo 3 and verify extension appears in system settings
+- [x] 7.2 Test deployment to Karoo 3 and verify extension appears in system settings
