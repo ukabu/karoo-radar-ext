@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Karoo Radar</string>
+    <string name="extension_name">Karoo Radar</string>
+    <string name="vehicle_count">Radar Vehicles</string>
+    <string name="vehicle_count_description">Number of detected vehicles</string>
+    <string name="closest_distance">Radar Distance</string>
+    <string name="closest_distance_description">Distance to closest vehicle</string>
+    <string name="relative_speed">Radar Rel Speed</string>
+    <string name="relative_speed_description">Relative speed of closest vehicle</string>
+    <string name="absolute_speed">Radar Abs Speed</string>
+    <string name="absolute_speed_description">Absolute speed of closest vehicle</string>
+</resources>

@@ -44,3 +44,7 @@ hs_err_pid*
 
 # Dependency directories
 node_modules/
+
+# Android SDK / local tools
+android-sdk/
+tools/

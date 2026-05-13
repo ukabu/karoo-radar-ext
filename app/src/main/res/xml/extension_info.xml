@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ExtensionInfo
+    displayName="@string/extension_name"
+    icon="@drawable/ic_radar"
+    id="karoo-radar"
+    scansDevices="false"
+    mapLayer="false"
+    fitFile="true">
+
+    <DataType
+        description="@string/vehicle_count_description"
+        displayName="@string/vehicle_count"
+        graphical="true"
+        icon="@drawable/ic_radar"
+        typeId="vehicle-count" />
+
+    <DataType
+        description="@string/closest_distance_description"
+        displayName="@string/closest_distance"
+        graphical="true"
+        icon="@drawable/ic_radar"
+        typeId="closest-distance" />
+
+    <DataType
+        description="@string/relative_speed_description"
+        displayName="@string/relative_speed"
+        graphical="true"
+        icon="@drawable/ic_radar"
+        typeId="relative-speed" />
+
+    <DataType
+        description="@string/absolute_speed_description"
+        displayName="@string/absolute_speed"
+        graphical="true"
+        icon="@drawable/ic_radar"
+        typeId="absolute-speed" />
+
+</ExtensionInfo>

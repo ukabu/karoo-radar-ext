@@ -1,0 +1,6 @@
+<resources>
+    <color name="radar_clear">#FF333333</color>
+    <color name="radar_approaching">#FFFBC02D</color>
+    <color name="radar_warning">#FFF57C00</color>
+    <color name="radar_critical">#FFD32F2F</color>
+</resources>
