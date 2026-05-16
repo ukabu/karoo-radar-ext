@@ -43,12 +43,15 @@ class RadarProcessor(
         private const val HANDOFF_SAMPLES = 2
         private const val EMA_ALPHA = 0.3
         private const val MAX_RELATIVE_SPEED_KMH = 200.0
+        private const val SPEED_WINDOW_MS = 2000L
+        private const val MIN_SPEED_DT_MS = 1000L
     }
+
+    private data class DistanceSample(val time: Long, val distance: Double)
 
     // EMA state for relative speed derivation
     private var emaSpeed: Double = 0.0
-    private var prevDistance: Double? = null
-    private var prevTime: Long = 0L
+    private val distanceHistory = ArrayDeque<DistanceSample>()
     private var handoffRemainingSamples: Int = 0
 
     private var processorJob: Job? = null
@@ -82,7 +85,7 @@ class RadarProcessor(
         karooSystem.streamDataFlow(DataType.Type.SPEED).collect { state ->
             when (state) {
                 is StreamState.Streaming -> {
-                    val speedMps = state.dataPoint.values[DataType.Field.SINGLE]
+                    val speedMps = state.dataPoint.values[DataType.Field.SPEED]
                     _speedState.value = SpeedState(speedMps = speedMps)
                 }
                 else -> {
@@ -160,19 +163,26 @@ class RadarProcessor(
 
     private fun deriveRelativeSpeed(currentDistance: Double): Double? {
         val now = System.currentTimeMillis()
-        val prev = prevDistance
-        val prevT = prevTime
-        prevDistance = currentDistance
-        prevTime = now
+        distanceHistory.addLast(DistanceSample(now, currentDistance))
 
-        if (prev == null || prevT == 0L) {
-            return null
+        // Discard samples outside the sliding window
+        while (distanceHistory.isNotEmpty() && now - distanceHistory.first().time > SPEED_WINDOW_MS) {
+            distanceHistory.removeFirst()
         }
 
-        val dtSeconds = (now - prevT) / 1000.0
-        if (dtSeconds <= 0.0) return emaSpeed.takeIf { it > 0 }
+        if (distanceHistory.size < 2) {
+            return emaSpeed.takeIf { it > 0 }
+        }
 
-        val dD = currentDistance - prev // negative when approaching
+        val oldest = distanceHistory.first()
+        val newest = distanceHistory.last()
+        val dtMs = newest.time - oldest.time
+        if (dtMs < MIN_SPEED_DT_MS) {
+            return emaSpeed.takeIf { it > 0 }
+        }
+
+        val dD = newest.distance - oldest.distance
+        val dtSeconds = dtMs / 1000.0
         val instantaneousKmh = (-dD / dtSeconds) * 3.6 // m/s to km/h
         val clamped = max(0.0, min(instantaneousKmh, MAX_RELATIVE_SPEED_KMH))
 
@@ -185,7 +195,6 @@ class RadarProcessor(
 
     private fun resetEma() {
         emaSpeed = 0.0
-        prevDistance = null
-        prevTime = 0L
+        distanceHistory.clear()
     }
 }
