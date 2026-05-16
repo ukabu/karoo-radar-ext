@@ -49,3 +49,7 @@ node_modules/
 # Android SDK / local tools
 android-sdk/
 tools/
+
+# FIT ride data files (binary test data)
+*.fit
+
