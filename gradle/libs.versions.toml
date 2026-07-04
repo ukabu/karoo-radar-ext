@@ -6,6 +6,8 @@ lifecycle = "2.8.6"
 glance = "1.1.1"
 karooExt = "1.1.9"
 composeBom = "2024.10.00"
+junit5 = "5.10.0"
+mockk = "1.13.11"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -19,6 +21,11 @@ androidx-ui = { module = "androidx.compose.ui:ui" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version = "1.7.4" }
 karoo-ext = { module = "io.hammerhead:karoo-ext", version.ref = "karooExt" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.8.0" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.8.0" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

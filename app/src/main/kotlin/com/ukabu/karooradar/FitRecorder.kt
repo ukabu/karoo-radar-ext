@@ -1,6 +1,5 @@
 package com.ukabu.karooradar
 
-import io.hammerhead.karooext.KarooSystemService
 import io.hammerhead.karooext.internal.Emitter
 import io.hammerhead.karooext.models.DeveloperField
 import io.hammerhead.karooext.models.FieldValue
@@ -10,6 +9,8 @@ import io.hammerhead.karooext.models.WriteToRecordMesg
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
@@ -17,8 +18,8 @@ import kotlinx.coroutines.launch
  * Writes radar developer fields to the FIT file at ~1 Hz during active recording.
  */
 class FitRecorder(
-    private val radarProcessor: RadarProcessor,
-    private val karooSystem: KarooSystemService,
+    private val radarStateFlow: StateFlow<RadarState>,
+    private val rideStateFlow: Flow<RideState>,
 ) {
 
     private val vehiclesField = DeveloperField(
@@ -54,8 +55,8 @@ class FitRecorder(
     fun start(emitter: Emitter<FitEffect>) {
         fitJob = CoroutineScope(Dispatchers.IO).launch {
             combine(
-                radarProcessor.radarState,
-                karooSystem.consumerFlow<RideState>(),
+                radarStateFlow,
+                rideStateFlow,
             ) { radar, ride -> radar to ride }
                 .collect { (radar, ride) ->
                     if (ride !is RideState.Recording || !radar.isConnected) {

@@ -42,7 +42,7 @@ class RadarExtension : KarooExtension("karoo-radar", "1.0.0") {
         super.onCreate()
         karooSystem = KarooSystemService(applicationContext)
         radarProcessor = RadarProcessor(karooSystem)
-        fitRecorder = FitRecorder(radarProcessor, karooSystem)
+        fitRecorder = FitRecorder(radarProcessor.radarState, karooSystem.consumerFlow())
 
         serviceJob = CoroutineScope(Dispatchers.IO).launch {
             karooSystem.connect { connected ->
