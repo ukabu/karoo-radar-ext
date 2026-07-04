@@ -1,13 +1,13 @@
 package com.ukabu.karooradar
 
-import com.ukabu.karooradar.ThreatLevel
+import androidx.compose.ui.graphics.Color
 
 /**
- * Converts threat level to background color resource.
+ * Converts threat level to background color for Glance datafields.
  */
-fun ThreatLevel.toBackgroundColor(): Int = when (this) {
-    ThreatLevel.CLEAR -> 0 // neutral, no override
-    ThreatLevel.APPROACHING -> com.ukabu.karooradar.R.color.radar_approaching
-    ThreatLevel.WARNING -> com.ukabu.karooradar.R.color.radar_warning
-    ThreatLevel.CRITICAL -> com.ukabu.karooradar.R.color.radar_critical
+fun ThreatLevel.toBackgroundColor(): Color = when (this) {
+    ThreatLevel.CLEAR -> Color.Transparent
+    ThreatLevel.APPROACHING -> Color(0xFFFBC02D)
+    ThreatLevel.WARNING -> Color(0xFFF57C00)
+    ThreatLevel.CRITICAL -> Color(0xFFD32F2F)
 }

@@ -43,7 +43,7 @@ class RadarProcessor(
         private const val HANDOFF_SAMPLES = 2
         private const val EMA_ALPHA = 0.3
         private const val MAX_RELATIVE_SPEED_KMH = 200.0
-        private const val SPEED_WINDOW_MS = 2000L
+        private const val SPEED_WINDOW_MS = 3000L
         private const val MIN_SPEED_DT_MS = 1000L
     }
 
@@ -123,24 +123,17 @@ class RadarProcessor(
             (dp.values[DataType.Field.RADAR_THREAT_LEVEL] ?: 0.0).toInt()
         )
 
-        // Handoff detection
+        // Handoff detection: when the closest target slot changes, suppress speed
+        // display for a short transition period.
         val prevSlot = _radarState.value.closestSlotIndex
-        val isHandoff = if (prevSlot != -1 && prevSlot != closestSlot) {
+        if (prevSlot != -1 && prevSlot != closestSlot) {
             handoffRemainingSamples = HANDOFF_SAMPLES
-            true
-        } else if (handoffRemainingSamples > 0) {
-            handoffRemainingSamples--
-            true
-        } else {
-            false
         }
 
-        val relativeSpeedKmh = if (isHandoff) {
-            resetEma()
-            null
-        } else {
-            deriveRelativeSpeed(closestDist)
-        }
+        // DataPoint does not expose a sample timestamp, so we fall back to wall-clock
+        // time. This means scheduling jitter can affect the derived dt.
+        val timestampMs = System.currentTimeMillis()
+        val relativeSpeedKmh = deriveRelativeSpeed(closestDist, timestampMs)
 
         val cyclistSpeedKmh = _speedState.value.speedKmh
         val absoluteSpeedKmh = if (relativeSpeedKmh != null && cyclistSpeedKmh != null) {
@@ -157,16 +150,22 @@ class RadarProcessor(
             absoluteSpeedKmh = absoluteSpeedKmh,
             isConnected = true,
             closestSlotIndex = closestSlot,
-            isHandoffActive = isHandoff,
+            isHandoffActive = handoffRemainingSamples > 0,
         )
     }
 
-    private fun deriveRelativeSpeed(currentDistance: Double): Double? {
-        val now = System.currentTimeMillis()
-        distanceHistory.addLast(DistanceSample(now, currentDistance))
+    private fun deriveRelativeSpeed(currentDistance: Double, timestampMs: Long): Double? {
+        distanceHistory.addLast(DistanceSample(timestampMs, currentDistance))
+
+        // During a handoff we keep collecting samples but suppress the computed
+        // speed so the UI shows "--" for a short transition period.
+        if (handoffRemainingSamples > 0) {
+            handoffRemainingSamples--
+            return null
+        }
 
         // Discard samples outside the sliding window
-        while (distanceHistory.isNotEmpty() && now - distanceHistory.first().time > SPEED_WINDOW_MS) {
+        while (distanceHistory.isNotEmpty() && timestampMs - distanceHistory.first().time > SPEED_WINDOW_MS) {
             distanceHistory.removeFirst()
         }
 

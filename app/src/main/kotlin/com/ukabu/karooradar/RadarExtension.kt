@@ -8,9 +8,11 @@ import io.hammerhead.karooext.KarooSystemService
 import io.hammerhead.karooext.extension.KarooExtension
 import io.hammerhead.karooext.internal.Emitter
 import io.hammerhead.karooext.models.FitEffect
+import io.hammerhead.karooext.models.UserProfile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 /**
@@ -46,6 +48,13 @@ class RadarExtension : KarooExtension("karoo-radar", "1.0.0") {
             karooSystem.connect { connected ->
                 // Connection state tracked via radar stream
             }
+
+            try {
+                SharedState.setImperialPreference(karooSystem.consumerFlow<UserProfile>().first())
+            } catch (e: Exception) {
+                // Keep default metric preference if profile is unavailable.
+            }
+
             radarProcessor.start()
         }
     }

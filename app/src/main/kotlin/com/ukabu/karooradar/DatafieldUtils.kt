@@ -13,14 +13,11 @@ import io.hammerhead.karooext.internal.ViewEmitter
 import io.hammerhead.karooext.models.DataPoint
 import io.hammerhead.karooext.models.StreamState
 import io.hammerhead.karooext.models.UpdateGraphicConfig
-import io.hammerhead.karooext.models.UserProfile
-import io.hammerhead.karooext.models.ViewConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
@@ -31,18 +28,12 @@ import kotlinx.coroutines.launch
 internal object DatafieldUtils {
     private val glance = GlanceRemoteViews()
 
-    suspend fun getUseImperial(radarExtension: RadarExtension): Boolean {
-        return try {
-            val profile = radarExtension.karooSystem.consumerFlow<UserProfile>().first()
-            profile.preferredUnit.distance == UserProfile.PreferredUnit.UnitType.IMPERIAL
-        } catch (e: Exception) {
-            false
-        }
+    fun getUseImperial(): Boolean {
+        return SharedState.useImperial.value ?: false
     }
 
     fun startRadarView(
         context: Context,
-        config: ViewConfig,
         emitter: ViewEmitter,
         radarExtension: RadarExtension,
         labelRes: Int,
@@ -55,7 +46,7 @@ internal object DatafieldUtils {
         scope.launch {
             while (isActive) {
                 val state = radarExtension.radarProcessor.radarState.value
-                val isImperial = getUseImperial(radarExtension)
+                val isImperial = getUseImperial()
                 val value = valueProvider(state, isImperial)
                 val label = context.getString(labelRes)
 

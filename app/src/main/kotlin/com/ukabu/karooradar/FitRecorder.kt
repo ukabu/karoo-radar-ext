@@ -62,22 +62,14 @@ class FitRecorder(
                         return@collect
                     }
 
-                    val values = buildList {
-                        add(FieldValue(vehiclesField, radar.vehicleCount.toDouble()))
-                        radar.closestDistanceMeters?.let {
-                            add(FieldValue(distanceField, it))
-                        }
-                        radar.relativeSpeedKmh?.let {
-                            add(FieldValue(relSpeedField, it))
-                        }
-                        radar.absoluteSpeedKmh?.let {
-                            add(FieldValue(absSpeedField, it))
-                        }
-                    }
+                    val values = listOf(
+                        FieldValue(vehiclesField, radar.vehicleCount.toDouble()),
+                        FieldValue(distanceField, radar.closestDistanceMeters ?: 0.0),
+                        FieldValue(relSpeedField, radar.relativeSpeedKmh ?: 0.0),
+                        FieldValue(absSpeedField, radar.absoluteSpeedKmh ?: 0.0),
+                    )
 
-                    if (values.isNotEmpty()) {
-                        emitter.onNext(WriteToRecordMesg(values))
-                    }
+                    emitter.onNext(WriteToRecordMesg(values))
                 }
         }
     }
