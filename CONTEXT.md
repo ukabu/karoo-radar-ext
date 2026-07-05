@@ -74,3 +74,11 @@ Developer field writes to FIT follow the ride state and radar connection state:
 
 ### Unit Policy
 Display units follow the Karoo system preference (metric or imperial). Datafields show whole-number values only. FIT file records store canonical SI units regardless of display setting.
+
+## References
+
+- **karoo-ext (GitHub)**: https://github.com/hammerheadnav/karoo-ext — Official Karoo Extension SDK source and examples.
+- **karoo-ext documentation**: https://hammerheadnav.github.io/karoo-ext/karoo-ext/io.hammerhead.karooext.extension/-karoo-extension/index.html — SDK API reference, starting point for extension lifecycle and data types.
+- **Karoo Visual System (Figma)**: https://www.figma.com/design/Adr23SlulPNE2RBu1VI28C/%3CH%3E-Visual-Data-Field-System?node-id=0-1&p=f — Hammerhead's visual data field system reference.
+
+Use these as starting points when looking for documentation and implementation patterns.
