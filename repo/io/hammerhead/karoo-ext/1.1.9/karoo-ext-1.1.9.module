@@ -1,0 +1,124 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.hammerhead",
+    "module": "karoo-ext",
+    "version": "1.1.9",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "karoo-ext-1.1.9.aar",
+          "url": "karoo-ext-1.1.9.aar",
+          "size": 559013,
+          "sha512": "d2f0d7d2a36fde5b634910b90a1c8c515a8a452619628719a335fe94c10190dff5ceb4def2b2d94355dfb09bd849453ecbc2bc17b248402e3e3cc725c9103d5e",
+          "sha256": "b9b9a60459f259a38f38964f896f03db9e63eb8d0758ad6e3f25a98fe7216b8d",
+          "sha1": "8848dd2a29e3ef9909d4e28c35f5a1d7190a0508",
+          "md5": "7f0212d2272e0df8f788a8157f7cc273"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.13.1"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.6.3"
+          }
+        },
+        {
+          "group": "com.jakewharton.timber",
+          "module": "timber",
+          "version": {
+            "requires": "5.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "karoo-ext-1.1.9.aar",
+          "url": "karoo-ext-1.1.9.aar",
+          "size": 559013,
+          "sha512": "d2f0d7d2a36fde5b634910b90a1c8c515a8a452619628719a335fe94c10190dff5ceb4def2b2d94355dfb09bd849453ecbc2bc17b248402e3e3cc725c9103d5e",
+          "sha256": "b9b9a60459f259a38f38964f896f03db9e63eb8d0758ad6e3f25a98fe7216b8d",
+          "sha1": "8848dd2a29e3ef9909d4e28c35f5a1d7190a0508",
+          "md5": "7f0212d2272e0df8f788a8157f7cc273"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "karoo-ext-1.1.9-sources.jar",
+          "url": "karoo-ext-1.1.9-sources.jar",
+          "size": 51824,
+          "sha512": "5a952d2974a4564495d978755548f1c9b0e2280e3d19dfd07410ed2ce077237ce839f48a4ea645eb2f12ce0e7fd9bdf53c35e8417a9543a1efd88bbd6d83ddc2",
+          "sha256": "96dd64bab5a2e1f6ccac177c6889ef548282296e6e472100d8879af2866c272c",
+          "sha1": "348e27c6efd2be5aa7666d99f43b59dc1c2731c5",
+          "md5": "b058f55c23020dc27b776aadfc1d86b2"
+        }
+      ]
+    }
+  ]
+}
