@@ -1,0 +1,11 @@
+Karoo Radar adds numerical rear radar datafields to your Hammerhead Karoo 3 ride profiles and records radar data directly to your ride FIT file for post-ride analysis.
+
+Features:
+- Vehicle Count: number of detected vehicles behind you
+- Closest Distance: distance to the nearest vehicle
+- Relative Speed: approximate closing speed of the nearest vehicle
+- Absolute Speed: estimated road speed of the nearest vehicle
+- Per-second scalar developer fields written to the FIT file
+- Background color changes with radar threat level
+
+The Karoo's built-in side-view and audio alerts continue to work normally. This extension complements them with raw numbers and recorded data.

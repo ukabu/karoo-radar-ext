@@ -12,15 +12,33 @@ android {
         applicationId = "com.ukabu.karooradar"
         minSdk = 23
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+
+        val versionNameValue = rootProject.file("version.txt").readText().trim()
+        versionName = versionNameValue
+        versionCode = versionNameValue.removePrefix("v").split(".").let { parts ->
+            val major = parts.getOrNull(0)?.toIntOrNull() ?: 0
+            val minor = parts.getOrNull(1)?.toIntOrNull() ?: 0
+            val patch = parts.getOrNull(2)?.toIntOrNull() ?: 0
+            major * 10000 + minor * 100 + patch
+        }
+    }
+
+    signingConfigs {
+        create("release") {
+            val keystorePath = System.getenv("RELEASE_KEYSTORE_PATH")
+                ?: "${rootProject.projectDir}/karoo-radar-release.keystore"
+            storeFile = file(keystorePath)
+            storePassword = System.getenv("RELEASE_KEYSTORE_PASSWORD") ?: ""
+            keyAlias = System.getenv("RELEASE_KEY_ALIAS") ?: ""
+            keyPassword = System.getenv("RELEASE_KEY_PASSWORD") ?: ""
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
         debug {
             isDebuggable = true

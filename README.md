@@ -40,9 +40,44 @@ Per-second scalar developer fields written to the ride file:
   - **Critical** — red
 - `--` shown when no vehicle detected or data unavailable.
 
-## Status
+## Installation
 
-Early design phase. Implementation not yet started.
+Karoo Radar is published on the Hammerhead Extension Library. Install it from there, then add the datafields to your ride profile in the Karoo app.
+
+## Development
+
+### Requirements
+
+- JDK 17+
+- Android SDK with platform 35 and build-tools 35.0.0
+- A Hammerhead Karoo 3 for testing
+
+### Build and install locally
+
+```bash
+./deploy.sh
+```
+
+This builds a debug APK and installs it on a Karoo connected via USB.
+
+### Run tests
+
+```bash
+./gradlew test
+```
+
+## Releasing
+
+Releases are automated with [release-please](https://github.com/googleapis/release-please).
+
+1. Merge conventional commits to `main`.
+2. `release-please` opens a Release PR.
+3. Review and merge the Release PR.
+4. `release-please` creates a git tag and GitHub Release.
+5. GitHub Actions builds and signs the release APK and attaches it to the release.
+6. Download the APK from the GitHub Release and upload it manually to the [Hammerhead Extension Library dashboard](https://dashboard.hammerhead.io).
+
+See [docs/releasing.md](docs/releasing.md) for keystore setup and required GitHub Secrets.
 
 ## Target Device
 
