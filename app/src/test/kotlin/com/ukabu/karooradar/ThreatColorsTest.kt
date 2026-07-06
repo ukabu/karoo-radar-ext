@@ -9,8 +9,8 @@ class ThreatColorsTest {
     @Test
     fun `threat levels map to expected background colors`() {
         assertEquals(Color.Transparent, ThreatLevel.CLEAR.toBackgroundColor())
-        assertEquals(Color(0xFFFBC02D), ThreatLevel.APPROACHING.toBackgroundColor())
+        assertEquals(Color(0xFFFBE401), ThreatLevel.APPROACHING.toBackgroundColor())
         assertEquals(Color(0xFFF57C00), ThreatLevel.WARNING.toBackgroundColor())
-        assertEquals(Color(0xFFD32F2F), ThreatLevel.CRITICAL.toBackgroundColor())
+        assertEquals(Color(0xFFF44336), ThreatLevel.CRITICAL.toBackgroundColor())
     }
 }

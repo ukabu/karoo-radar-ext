@@ -24,6 +24,7 @@ class RelativeSpeedDataType(
     override fun startView(context: Context, config: ViewConfig, emitter: ViewEmitter) {
         DatafieldUtils.startRadarView(
             context = context,
+            config = config,
             emitter = emitter,
             radarExtension = radarExtension,
             labelRes = R.string.relative_speed,
@@ -31,9 +32,9 @@ class RelativeSpeedDataType(
                 val speed = state.relativeSpeedKmh
                 if (speed == null || state.isHandoffActive) "--" else {
                     if (isImperial) {
-                        "${Units.kmhToMph(speed).toInt()}mph"
+                        "${Units.kmhToMph(speed).toInt()}"
                     } else {
-                        "${speed.toInt()}km/h"
+                        "${speed.toInt()}"
                     }
                 }
             }

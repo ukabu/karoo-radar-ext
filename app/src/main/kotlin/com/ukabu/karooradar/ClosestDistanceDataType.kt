@@ -24,6 +24,7 @@ class ClosestDistanceDataType(
     override fun startView(context: Context, config: ViewConfig, emitter: ViewEmitter) {
         DatafieldUtils.startRadarView(
             context = context,
+            config = config,
             emitter = emitter,
             radarExtension = radarExtension,
             labelRes = R.string.closest_distance,
@@ -31,9 +32,9 @@ class ClosestDistanceDataType(
                 val dist = state.closestDistanceMeters
                 if (dist == null) "--" else {
                     if (isImperial) {
-                        "${Units.metersToFeet(dist).toInt()}ft"
+                        "${Units.metersToFeet(dist).toInt()}"
                     } else {
-                        "${dist.toInt()}m"
+                        "${dist.toInt()}"
                     }
                 }
             }

@@ -23,6 +23,7 @@ class VehicleCountDataType(
     override fun startView(context: Context, config: ViewConfig, emitter: ViewEmitter) {
         DatafieldUtils.startRadarView(
             context = context,
+            config = config,
             emitter = emitter,
             radarExtension = radarExtension,
             labelRes = R.string.vehicle_count,

@@ -24,6 +24,7 @@ class AbsoluteSpeedDataType(
     override fun startView(context: Context, config: ViewConfig, emitter: ViewEmitter) {
         DatafieldUtils.startRadarView(
             context = context,
+            config = config,
             emitter = emitter,
             radarExtension = radarExtension,
             labelRes = R.string.absolute_speed,
@@ -31,9 +32,9 @@ class AbsoluteSpeedDataType(
                 val speed = state.absoluteSpeedKmh
                 if (speed == null) "--" else {
                     if (isImperial) {
-                        "${Units.kmhToMph(speed).toInt()}mph"
+                        "${Units.kmhToMph(speed).toInt()}"
                     } else {
-                        "${speed.toInt()}km/h"
+                        "${speed.toInt()}"
                     }
                 }
             }
