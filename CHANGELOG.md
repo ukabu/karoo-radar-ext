@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/ukabu/karoo-radar-ext/compare/v1.1.0...v1.2.0) (2026-07-06)
+
+
+### Features
+
+* align radar datafields with Karoo native design ([4afa95e](https://github.com/ukabu/karoo-radar-ext/commit/4afa95eea021c5b67e1ed77bfbd6e102744b6973))
+
 ## [1.1.0](https://github.com/ukabu/karoo-radar-ext/compare/v1.0.0...v1.1.0) (2026-07-05)
 
 
