@@ -36,7 +36,7 @@ internal object DatafieldUtils {
         labelRes: Int,
         valueProvider: (com.ukabu.karooradar.RadarState, Boolean) -> String,
     ) {
-        emitter.onNext(UpdateGraphicConfig(showHeader = true))
+        emitter.onNext(UpdateGraphicConfig(showHeader = false))
 
         val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
@@ -50,8 +50,10 @@ internal object DatafieldUtils {
                 val remoteViews = radarDatafieldRemoteViews(
                     context = context,
                     alignment = config.alignment,
+                    label = label,
                     value = value,
                     threatLevel = state.threatLevel,
+                    textSize = config.textSize,
                 )
                 emitter.updateView(remoteViews)
                 delay(1000L)

@@ -2,6 +2,7 @@ package com.ukabu.karooradar
 
 import android.content.Context
 import android.content.res.Configuration
+import android.util.TypedValue
 import android.widget.RemoteViews
 import androidx.compose.ui.graphics.toArgb
 import io.hammerhead.karooext.models.ViewConfig
@@ -12,8 +13,10 @@ import io.hammerhead.karooext.models.ViewConfig
 internal fun radarDatafieldRemoteViews(
     context: Context,
     alignment: ViewConfig.Alignment,
+    label: String,
     value: String,
     threatLevel: ThreatLevel,
+    textSize: Int,
 ): RemoteViews {
     val layoutRes = when (alignment) {
         ViewConfig.Alignment.LEFT -> R.layout.radar_datafield_left
@@ -28,8 +31,11 @@ internal fun radarDatafieldRemoteViews(
 
     val textColor = threatLevel.toTextColor(isNightMode)
 
-    rv.setTextViewText(R.id.field_value, value)
+    rv.setTextViewText(R.id.field_label, label)
+    rv.setTextColor(R.id.field_label, textColor.toArgb())
 
+    rv.setTextViewText(R.id.field_value, value)
+    rv.setTextViewTextSize(R.id.field_value, TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
     rv.setTextColor(R.id.field_value, textColor.toArgb())
 
     val backgroundRes = when (threatLevel) {

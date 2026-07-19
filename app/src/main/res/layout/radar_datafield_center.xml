@@ -3,18 +3,86 @@
     android:id="@+id/field_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="4dp">
+    android:clipChildren="false">
 
     <TextView
-        android:id="@+id/field_value"
-        android:layout_width="wrap_content"
+        android:id="@+id/header_ref"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="28sp"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textColor="?android:attr/textColorPrimary"
-        android:maxLines="1"
-        android:ellipsize="end" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginTop="7dp"
+        android:lines="1"
+        android:text="M"
+        android:textAllCaps="true"
+        android:fontFamily="Ping L"
+        android:includeFontPadding="false"
+        android:lineSpacingMultiplier="0.6"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/field_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:minHeight="22dp"
+        android:clipToPadding="false"
+        android:paddingTop="7dp"
+        android:paddingStart="1dp"
+        android:paddingEnd="3dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/field_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="1dp"
+            android:maxLines="2"
+            android:gravity="center_vertical|center_horizontal"
+            android:ellipsize="end"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:fontFamily="Ping L"
+            android:includeFontPadding="false"
+            android:lineSpacingMultiplier="0.6"
+            android:breakStrategy="simple" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/baseline_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_ref"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:clipChildren="false">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/field_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0"
+            android:fontFamily="Hammerhead Relative Mono 12"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 </RelativeLayout>
