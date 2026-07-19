@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/ukabu/karoo-radar-ext/compare/v1.2.0...v1.2.1) (2026-07-19)
+
+
+### Bug Fixes
+
+* adjust radar datafield font sizes and header spacing ([6ef8863](https://github.com/ukabu/karoo-radar-ext/commit/6ef8863d82331a0a881eedff9b0861d259615fb4))
+
 ## [1.2.0](https://github.com/ukabu/karoo-radar-ext/compare/v1.1.0...v1.2.0) (2026-07-06)
 
 
