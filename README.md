@@ -44,6 +44,19 @@ Per-second scalar developer fields written to the ride file:
 
 Karoo Radar is published on the Hammerhead Extension Library. Install it from there, then add the datafields to your ride profile in the Karoo app.
 
+### Troubleshooting sideload installs
+
+If you side-load the APK through the Hammerhead companion app and the install screen appears stuck at "installing", the APK has likely installed successfully on the Karoo but the companion app never received the completion callback. This is a known companion-app/Karoo-OS issue (the system `PACKAGE_ADDED` broadcast is blocked from background execution, so the progress UI doesn't update).
+
+Workarounds:
+
+- Check the Karoo directly — the extension usually shows as installed and the datafields can be added.
+- Force-stop and reopen the companion app to resync its state.
+- Install with ADB instead:
+  ```bash
+  adb install karoo-radar-X.Y.Z-release.apk
+  ```
+
 ## Development
 
 ### Requirements
