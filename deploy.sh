@@ -112,8 +112,20 @@ if ! command -v adb >/dev/null 2>&1; then
 fi
 
 if ! adb devices | grep -q "device$"; then
-    echo "WARNING: No Android device connected via ADB"
-    echo "Connect your Karoo 3 via USB and try again"
+    if adb devices | grep -q "no permissions"; then
+        echo "ERROR: Karoo detected but ADB has no permission to access it."
+        echo ""
+        echo "This is a Linux udev rule mismatch. The Karoo currently enumerates with"
+        echo "USB vendor 05c6 (Qualcomm), but the udev rule only matches 18d1 (Google)."
+        echo ""
+        echo "Fix it automatically with:"
+        echo "  ./scripts/fix-adb-permissions.sh"
+        echo ""
+        echo "Then unplug/replug the Karoo once and re-run this script."
+    else
+        echo "WARNING: No Android device connected via ADB"
+        echo "Connect your Karoo 3 via USB and try again"
+    fi
     exit 1
 fi
 

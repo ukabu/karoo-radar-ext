@@ -68,10 +68,25 @@ Workarounds:
 ### Build and install locally
 
 ```bash
+source scripts/env.sh   # puts adb + ANDROID_HOME on your PATH
 ./deploy.sh
 ```
 
 This builds a debug APK and installs it on a Karoo connected via USB.
+
+#### Linux: ADB `no permissions`
+
+If `adb devices` shows the Karoo as `no permissions`, run the helper script:
+
+```bash
+./scripts/fix-adb-permissions.sh
+```
+
+It installs a udev rule matching both Google's `18d1` and the Karoo's Qualcomm
+`05c6` USB vendor IDs, reloads udev, and restarts adb. After it finishes,
+unplug/replug the Karoo. Your user must be in the `plugdev` group
+(`sudo usermod -aG plugdev $USER`). `./deploy.sh` points at this script if it
+detects the `no permissions` state.
 
 ### Run tests
 
