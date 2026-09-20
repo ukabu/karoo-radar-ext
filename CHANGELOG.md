@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/ukabu/karoo-radar-ext/compare/v1.2.1...v1.2.2) (2026-09-20)
+
+
+### Bug Fixes
+
+* match native Karoo datafield fonts and vertical metrics ([272b44d](https://github.com/ukabu/karoo-radar-ext/commit/272b44da5f97e6a3c04b1a9fe506f6383fdc80ae))
+
 ## [1.2.1](https://github.com/ukabu/karoo-radar-ext/compare/v1.2.0...v1.2.1) (2026-07-19)
 
 
